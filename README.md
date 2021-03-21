@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
 # BoardGameHub
 
 ### **1. Goal of Application:**
@@ -13,7 +16,12 @@
 
 ### **4. Additional Feature:**
 > The additional feature I'd like to implement would be having users log in to their account, which will display a list of favorite games that person wanted to save. This favorite   system will show the timestamp of the game's save date, as well as the entry information of that game. The goal is for these games to be easily accessible to the player without   having to go find it all over again.
+<<<<<<< HEAD
 =======
+=======
+
+
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
