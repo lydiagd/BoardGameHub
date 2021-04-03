@@ -16,6 +16,15 @@
                         <a class="nav-link" href="/invoices">Invoices</a>
                     </li>
                 </ul> --}}
+
+                <nav>
+                    <ul class="menu">
+                      <li class="logo"><a href="#">Creative Mind Agency</a></li>
+                      <li class="subitem"><a href="#">Development</a></li>
+                        <li class="subitem"><a href="#">SEO</a></li>
+                        <li class="subitem"><a href="#">Copywriting</a></li>
+                    </ul>
+                </nav>
             </div>
             <div class="col-9">
                 <header>

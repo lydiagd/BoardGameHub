@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main2')
 
 @section('title', 'Board Game Hub')
 <title>Board Game Hub</title>
@@ -7,17 +7,19 @@
 <head>
     <style>
     h1 {text-align: left;}
+    h3 {text-align: left;}
     p {text-align: center;}
     div {text-align: center;}
     </style>
     </head>
 
 <div class="text-end mb-3" vertical-align:top>
+    <h3>Welcome!</h3>
     <img src="{{url('/images/board-games.jpg')}}" alt="Image"/>
 </div>
-<div>
-    <h1>Welcome!</h1>
-</div>
+{{-- <div>
+    
+</div> --}}
      
     <tbody>
       
