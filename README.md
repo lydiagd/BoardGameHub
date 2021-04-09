@@ -1,6 +1,8 @@
-=======
+=============================================================
 
-# BoardGameHub - https://board-game-hub.herokuapp.com/
+# BoardGameHub 
+> https://board-game-hub.herokuapp.com/
+> -------------------------------------
 
 ### **1. Goal of Application:**
 > I will be creating an Online Board Game Hub where users can see a list of free, playable games online (board game, computer game, escape rooms, etc), and their respective links.  > Inspiration and many of my database entries will come from the Quarantine Games Doc: 
@@ -15,7 +17,7 @@
 ### **4. Additional Feature:**
 > The additional feature I'd like to implement would be having users log in to their account, which will display a list of favorite games that person wanted to save. This favorite   system will show the timestamp of the game's save date, as well as the entry information of that game. The goal is for these games to be easily accessible to the player without   having to go find it all over again.
 
-
+=============================================================
 
 
 
