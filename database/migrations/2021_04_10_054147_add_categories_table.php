@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Category;
 
 class AddCategoriesTable extends Migration
 {
@@ -13,25 +14,31 @@ class AddCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('configurations', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
         });
 
 
-        // $roles = [
-        //     'user' => 'User',
-        //     'admin' => 'Admin',
-        // ];
+        $groups = [
+            'Board Game',
+            'Card Game',
+            'Escape Room',
+            'Drawing Game',
+            'Word Game',
+            'Party Game',
+            'Puzzle',
+            'Web Game',
+        ];
 
-        // foreach ($roles as $slug => $name) {
-        //     // $role = new Role();
-        //     // $role->slug = $slug;
-        //     // $role->name = $name;
-        //     // $role->save();
+        foreach ($groups as $group) {
+            // $role = new Role();
+            // $role->slug = $slug;
+            // $role->name = $name;
+            // $role->save();
 
-        //     Role::create([ 'slug' => $slug, 'name' => $name ]); //this is the same!
-        // }
+            Category::create([ 'name' => $group]); //this is the same!
+        }
     }
 
     /**
@@ -41,6 +48,6 @@ class AddCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('configurations');
+        Schema::dropIfExists('categories');
     }
 }

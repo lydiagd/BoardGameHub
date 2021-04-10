@@ -13,7 +13,11 @@ class AddFavoritesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('favorites', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('game_id');
+            $table->foreignId('user_id');
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class AddFavoritesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('favorites');
     }
 }
