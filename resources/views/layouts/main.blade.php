@@ -65,8 +65,8 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Menu </div>
         <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action bg-light">About</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+            <a href="{{ route('main') }}" class="list-group-item list-group-item-action bg-light">Main Dashboard</a>
+            <a href="{{ route('about') }}" class="list-group-item list-group-item-action bg-light">About</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Board Games</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">User's Favorites</a>
             @if (Auth::check())
@@ -89,11 +89,14 @@
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                @if (Auth::check())
+                    <p style="color:rgb(81, 117, 216);">Hello, {{Auth::user()->name}} </p>
+                @endif
                 <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#">My Favorites</a>
                 </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

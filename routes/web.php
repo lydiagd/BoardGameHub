@@ -20,12 +20,12 @@ Route::get('/laravel', function () {
 
 Route::get('/', function () {
     return view('game.index');
-});
+})->name('main');
 
 // Route::get('/games', 'App\Http\Controllers\GameController@index')->name('gamePage.index');
 Route::get('/about', function () {
-    return view('game.index');
-});
+    return view('game.about');
+})->name('about');
 
 Route::get('/register', 'App\Http\Controllers\RegistrationController@index')->name('registration.index');
 Route::post('/register', 'App\Http\Controllers\RegistrationController@register')->name('registration.create');

@@ -14,10 +14,7 @@
     </head>
 
 <div class="text-end mb-3" vertical-align:top>
-    <h3>Welcome!</h3>
-    <p>This site is meant to be an interactive community hub for online games, such a board games, card games, Escape Rooms,
-      and more fun party games. Check out games other people have added in the 'Games' tab. Log in to add your own game links 
-      and save games in your 'Favorites' list. Have fun and game on! </p>
+    <h3>Link to games</h3>
     <img src="{{url('/images/board-games.jpg')}}" alt="Image"/>
 </div>
 {{-- <div>
