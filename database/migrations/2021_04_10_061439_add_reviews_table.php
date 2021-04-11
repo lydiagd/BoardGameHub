@@ -15,7 +15,8 @@ class AddReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->int('difficulty');
+            $table->foreignId('game_id')->constrained();
+            $table->integer('difficulty');
             $table->boolean('playAgain');
             $table->longText('body');
         });

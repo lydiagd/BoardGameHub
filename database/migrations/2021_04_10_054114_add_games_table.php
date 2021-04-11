@@ -15,15 +15,12 @@ class AddGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
             $table->string('name');
             $table->string('link');
-            $table->int('playerMin');
-            $table->int('playerMax');
+            $table->integer('playerMin');
+            $table->integer('playerMax');
             $table->longText('description');
-            $table->foreignId('category_id');
-            $table->int('ageMin');
-            $table->foreignId('review_id');
+            $table->integer('ageMin');
             $table->unsignedDecimal('length', $precision = 8, $scale = 2);
             $table->timestamps();
         });

@@ -22,7 +22,12 @@ Route::get('/', function () {
     return view('game.index');
 })->name('main');
 
-// Route::get('/games', 'App\Http\Controllers\GameController@index')->name('gamePage.index');
+Route::get('/games', 'App\Http\Controllers\GameController@index')->name('games');
+Route::get('/games/create', 'App\Http\Controllers\GameController@create')->name('games.create');
+Route::post('/games', 'App\Http\Controllers\GameController@store')->name('games.store');
+
+
+
 Route::get('/about', function () {
     return view('game.about');
 })->name('about');

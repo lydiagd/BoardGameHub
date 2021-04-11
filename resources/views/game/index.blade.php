@@ -14,7 +14,7 @@
     </head>
 
 <div class="text-end mb-3" vertical-align:top>
-    <h3>Link to games</h3>
+    <h3>View all games</h3>
     <img src="{{url('/images/board-games.jpg')}}" alt="Image"/>
 </div>
 {{-- <div>
