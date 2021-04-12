@@ -23,10 +23,13 @@
         @foreach($games as $game)
             <tr>
                 <td>
-                    {{$game->title}}
+                    {{$game->gameName}}
                 </td>
                 <td>
                     {{$game->playerMin}}-{{$game->playerMax}} players
+                </td>
+                <td>
+                    {{$game->ageMin}}+
                 </td>
                 <td>
                     {{$game->category->name}}
@@ -34,13 +37,13 @@
                 <td>
                     {{$game->user->name}}
                 </td>
-                <td>
+                {{-- <td>
                     @can('update', $album)
                     <a href="{{ route('albumE.edit', ['id' => $album->alb_id ])}}">
                         Edit
                     </a>
                     @endcan
-                </td>
+                </td> --}}
             </tr>
             @endforeach
         </tbody>

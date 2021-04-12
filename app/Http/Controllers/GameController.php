@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
     function index(){
 
         $games = Game::With(['user'])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
-        ->select('*')->orderBy('games.name')->get();
+        ->select('*', 'games.name as gameName')->orderBy('games.name')->get();
 
         return view('game.games', [
             'games' => $games,
@@ -35,7 +36,7 @@ class GameController extends Controller
             'link' => 'required|max:200',
             'playerMin' => 'required|integer|digits_between:1,100|gt:0',
             'playerMax' => 'required|integer|gt:0|gte:playerMin|digits_between:1,100',
-            'age' => 'required|integer|digits_between:1,18',
+            'age' => 'required|integer|gt:0|lte:21',
             'length' => 'required',
             'description' => 'required'
         ]); 
@@ -45,13 +46,14 @@ class GameController extends Controller
 
         $game = new Game();
         $game->name = $request->input('name');
-        $game->category = $categoryInput;
+        $game->category_id = $request->input('category');
         $game->link = $request->input('link');
         $game->playerMin = $request->input('playerMin');
         $game->playerMax = $request->input('playerMax');
-        $game->ageMin = $request->input('ageMin');
+        $game->ageMin = $request->input('age');
         $game->length = $request->input('length');
         $game->description = $request->input('description');
+        $game->user_id = Auth::User()->id;
         $game->save();
 
 
