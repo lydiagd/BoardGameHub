@@ -32,20 +32,32 @@ class GameController extends Controller
         $request->validate([
             'name' => 'required|max:100', 
             'category' => 'required|exists:categories,id',
-        ]); //|max:20 means max characters entered is 20; exists rule means it must be in the table
+            'link' => 'required|max:200',
+            'playerMin' => 'required|integer|digits_between:1,100|gt:0',
+            'playerMax' => 'required|integer|gt:0|gte:playerMin|digits_between:1,100',
+            'age' => 'required|integer|digits_between:1,18',
+            'length' => 'required',
+            'description' => 'required'
+        ]); 
 
         // $artist = Artist::where('id', '=', $request->input('artist'))->first();
+        $categoryInput = Category::Where('id', '=', $request->input('category'))->first();
 
-        // $album = new Album();
-        // $album->title = $request->input('title');
-        // $album->artist_id = $artist->id;
-        // $album->user_id = Auth::user()->id;
-        // $album->save();
+        $game = new Game();
+        $game->name = $request->input('name');
+        $game->category = $categoryInput;
+        $game->link = $request->input('link');
+        $game->playerMin = $request->input('playerMin');
+        $game->playerMax = $request->input('playerMax');
+        $game->ageMin = $request->input('ageMin');
+        $game->length = $request->input('length');
+        $game->description = $request->input('description');
+        $game->save();
 
 
-        // return redirect()
-        //     ->route('albumE.index')
-        //     ->with('success', "Successfully created album {$artist->name} - {$request->input('title')}");
+        return redirect()
+            ->route('games')
+            ->with('success', "Successfully created game entry: {$request->input('name')}");
 
     }
 }

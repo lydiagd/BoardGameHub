@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Games List')
-<title>All Games</title>
+<title align="right">All Games</title>
 @section('content')
 <body style="background-color:rgb(151, 208, 223);">
     @if(Auth::check())
