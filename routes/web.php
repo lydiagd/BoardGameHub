@@ -23,6 +23,7 @@ Route::get('/', function () {
 })->name('main');
 
 Route::get('/games', 'App\Http\Controllers\GameController@index')->name('games');
+Route::get('/games/{id}', 'App\Http\Controllers\GameController@show')->name('games.show');
 Route::get('/games/create', 'App\Http\Controllers\GameController@create')->name('games.create');
 Route::post('/games', 'App\Http\Controllers\GameController@store')->name('games.store');
 

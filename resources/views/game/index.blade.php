@@ -7,18 +7,27 @@
 <head>
     <style>
     h1 {text-align: left;}
+    h2 {text-align: center;}
     h3 {text-align: left;}
     p {text-align: center;}
     div {text-align: center;}
+    .tab {
+            display: inline-block;
+            margin-left: 80px;
+        }
     </style>
-    </head>
+  </head>
 
 <div class="text-end mb-3" vertical-align:top>
-    <h3>View all games</h3>
+  <p></p>
+    <h3><a href="{{ route('games')}}"> View All Games </a> 
+      <span class="tab"></span><a href="{{ route('auth.login')}}"> Sign In </a>
+      <span class="tab"></span><a href="{{ route('about')}}"> About This Page </a></h3>
+      
     <img src="{{url('/images/board-games.jpg')}}" alt="Image"/>
 </div>
 {{-- <div>
-    
+  <h3><a href="{{ route('games')}}"> View All Games </a></h3>
 </div> --}}
      
     <tbody>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Category;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
@@ -12,11 +14,27 @@ class GameController extends Controller
     function index(){
 
         $games = Game::With(['user'])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
-        ->select('*', 'games.name as gameName')->orderBy('games.name')->get();
+        ->select('*', 'games.name as gameName', 'games.id as id')->orderBy('games.name')->get();
 
         return view('game.games', [
             'games' => $games,
         ]);
+    }
+
+    function show($id){
+
+        $game = Game::Where('id', '=', $id)->first();
+
+        $reviews = Review::Where('game_id', '=', $id);
+
+        $user = User::Where('id', '=', $game->user_id)->first();
+
+        return view('game.show', [
+            'game' => $game,
+            'reviews' => $reviews,
+            'user' => $user,
+        ]);
+
     }
 
     function create(){

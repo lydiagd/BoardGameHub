@@ -3,6 +3,19 @@
 @section('title', 'Games List')
 <title align="right">All Games</title>
 @section('content')
+<style>
+    a:link {
+      color: rgb(204, 184, 235);
+      background-color: transparent;
+      text-decoration: none;
+    }    
+    a:hover {
+      color: rgb(231, 187, 187);
+      background-color: transparent;
+      text-decoration: underline;
+    }
+    </style>
+    
 <body style="background-color:rgb(151, 208, 223);">
     @if(Auth::check())
     <div class="text-end mb-3" align="right" >
@@ -23,7 +36,7 @@
         @foreach($games as $game)
             <tr>
                 <td>
-                    {{$game->gameName}}
+                    <a href="{{ route('games.show', ['id' => $game->id ])}}">{{$game->gameName}} </a>
                 </td>
                 <td>
                     {{$game->playerMin}}-{{$game->playerMax}} players
