@@ -24,11 +24,11 @@ Route::get('/', function () {
 
 Route::get('/games', 'App\Http\Controllers\GameController@index')->name('games');
 Route::get('/games/{id}', 'App\Http\Controllers\GameController@show')->name('games.show');
-Route::get('/games/create', 'App\Http\Controllers\GameController@create')->name('games.create');
+Route::get('/games/newgame/create', 'App\Http\Controllers\GameController@create')->name('games.create');
 Route::post('/games', 'App\Http\Controllers\GameController@store')->name('games.store');
 
 Route::get('/games/{id}/review', 'App\Http\Controllers\ReviewController@create')->name('review.create');
-
+Route::post('/games/{id}', 'App\Http\Controllers\ReviewController@store')->name('review.store');
 
 Route::get('/about', function () {
     return view('game.about');

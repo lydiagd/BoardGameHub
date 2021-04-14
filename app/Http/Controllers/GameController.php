@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
-    function index(){
+    public function index(){
 
         $games = Game::With(['user'])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
         ->select('*', 'games.name as gameName', 'games.id as id')->orderBy('games.name')->get();
@@ -25,7 +25,7 @@ class GameController extends Controller
         ]);
     }
 
-    function show($id){
+    public function show($id){
 
         $game = Game::Where('id', '=', $id)->first();
 
@@ -41,7 +41,7 @@ class GameController extends Controller
 
     }
 
-    function create(){
+    public function create(){
 
         $categories = Category::All();
 
@@ -55,11 +55,11 @@ class GameController extends Controller
         $request->validate([
             'name' => 'required|max:100', 
             'category' => 'required|exists:categories,id',
-            'link' => 'required|max:200',
+            'link' => 'required|max:200|unique:App\Models\Game,link',
             'playerMin' => 'required|integer|digits_between:1,100|gt:0',
             'playerMax' => 'required|integer|gt:0|gte:playerMin|digits_between:1,100',
             'age' => 'required|integer|gt:0|lte:21',
-            'length' => 'required',
+            'length' => 'required|integer',
             'description' => 'required'
         ]); 
 

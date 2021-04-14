@@ -75,7 +75,7 @@
 
         {{-- LENGTH --}}
         <div class="mb-3">
-            <label for="length" class="form-label">Length of the Game</label>
+            <label for="length" class="form-label">Length of the Game (in minutes)</label>
             <input type="number" name="length" id="length" class="form-control" value="{{ old('length')}}">
             @error('length')
                 <small class="text-danger">{{$message}}</small>

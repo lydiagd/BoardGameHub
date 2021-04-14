@@ -12,6 +12,7 @@
         <tr>
             <th>{{$game->playerMin}} to {{$game->playerMax}} players</th>
             <th>Ages {{$game->ageMin}}+</th>
+            <th> {{$game->length}} minutes long </th>
         </tr>
         <tr>
             <th>Category:</th>
