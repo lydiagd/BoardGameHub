@@ -35,5 +35,20 @@
     <p>
         {{$game->description}}
     </p>
+    <h3> Reviews </h3>
+    {{-- <table class="table table-striped"> --}}
+        <td>
+            <a href="{{ route('review.create', ['id' => $game->id ])}}">Add a New Review</a>
+        </td>
+        @foreach($reviews as $review)
+        <div style="background-color:rgba(238, 222, 222, 0.047); text-align:center; vertical-align: middle; padding:40px 0;">
+        <tr>
+            <td>
+                Description of Game:
+            </td>
+        </tr>
+        </div>
+        @endforeach
+    {{-- </table> --}}
 </body>
 @endsection

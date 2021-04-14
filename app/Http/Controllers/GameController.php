@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
@@ -16,8 +17,11 @@ class GameController extends Controller
         $games = Game::With(['user'])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
         ->select('*', 'games.name as gameName', 'games.id as id')->orderBy('games.name')->get();
 
+        $difficulty = DB::table('reviews')->avg('difficulty');
+
         return view('game.games', [
             'games' => $games,
+            'difficulty' => $difficulty,
         ]);
     }
 

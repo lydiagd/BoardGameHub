@@ -27,6 +27,7 @@ Route::get('/games/{id}', 'App\Http\Controllers\GameController@show')->name('gam
 Route::get('/games/create', 'App\Http\Controllers\GameController@create')->name('games.create');
 Route::post('/games', 'App\Http\Controllers\GameController@store')->name('games.store');
 
+Route::get('/games/{id}/review', 'App\Http\Controllers\ReviewController@create')->name('review.create');
 
 
 Route::get('/about', function () {
@@ -39,3 +40,4 @@ Route::get('/login', 'App\Http\Controllers\AuthController@loginForm')->name('aut
 Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('auth.login');
 Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
 Route::post('/logout', 'App\Http\Controllers\AuthController@logout')->name('auth.logout');
+
