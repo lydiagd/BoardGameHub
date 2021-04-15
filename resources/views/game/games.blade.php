@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Games List')
-<title align="right">All Games</title>
+<title align="right">All Games </title>
 @section('content')
 <style>
     a:link {
@@ -10,7 +10,7 @@
       text-decoration: none;
     }    
     a:hover {
-      color: rgb(231, 187, 187);
+      color: rgba(230, 202, 217, 0.719);
       background-color: transparent;
       text-decoration: underline;
     }
@@ -32,7 +32,7 @@
             <th>Age Requirement:</th>
             <th>Category:</th>
             <th>Added By:</th>
-            <th>Average Difficulty</th>
+            <th>Average Difficulty </th>
         </tr>
         </thead>
         <tbody>
@@ -54,7 +54,11 @@
                     {{$game->user->name}}
                 </td>
                 <td>
-                    {{$difficulty}}
+                    @if($game->averageDifficulty() > 0)
+                        {{$game->averageDifficulty()}} / 10
+                    @else
+                        No rating yet
+                    @endif
                 </td>
                 {{-- <td> make it so if you're authorized to edit entry, you can do so
                     @can('update', $album)

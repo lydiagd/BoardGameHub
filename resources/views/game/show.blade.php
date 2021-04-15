@@ -12,10 +12,10 @@
         <tr>
             <th>{{$game->playerMin}} to {{$game->playerMax}} players</th>
             <th>Ages {{$game->ageMin}}+</th>
-            <th> {{$game->length}} minutes long </th>
+            <th> {{round($game->length)}} minutes long </th>
         </tr>
         <tr>
-            <th>Category:</th>
+            <th>Category: {{$game->category->name}} </th>
         </tr>
         <tr>
         </tr>
@@ -30,26 +30,36 @@
 
         </tbody>
     </table>
-    <td>
-        Description of Game:
-    </td>
+     <h3>   Description of Game: </h3>
     <p>
         {{$game->description}}
     </p>
-    <h3> Reviews </h3>
+    <h3>------------------------------------------------------------------------------</h3>
+    <h3 align="center"> Reviews </h3>
     {{-- <table class="table table-striped"> --}}
         <td>
             <a href="{{ route('review.create', ['id' => $game->id ])}}">Add a New Review</a>
         </td>
-        @foreach($reviews as $review)
-        <div style="background-color:rgba(238, 222, 222, 0.047); text-align:center; vertical-align: middle; padding:40px 0;">
-        <tr>
+        <tbody>
+
+            {{-- @foreach($reviews as $review) --}}
             <td>
-                Description of Game:
+                HERE {{$review1->difficulty}}
             </td>
-        </tr>
-        </div>
-        @endforeach
+            <div style="background-color:rgba(238, 222, 222, 0.047); text-align:center; vertical-align: middle; padding:40px 0;">
+                <tr>
+                    <td>
+                        Difficulty: {{$review1->difficulty}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Review Content: {{$review1->body}}
+                    </td>
+                </tr>
+            </div>
+            {{-- @endforeach --}}
+        </tbody>
     {{-- </table> --}}
 </body>
 @endsection

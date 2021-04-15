@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Game extends Model
 {
@@ -22,5 +23,12 @@ class Game extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function averageDifficulty()
+    {
+        $average = DB::table('reviews')->where('game_id', $this->id)->avg('difficulty');
+        return round($average);
+        
     }
 }

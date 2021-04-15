@@ -24,7 +24,7 @@ class ReviewController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'difficulty' => 'required|integer|lt:10|gt:0',
+            'difficulty' => 'required|integer|lte:10|gt:0',
             'body' => 'required',
         ]); 
 
@@ -32,6 +32,7 @@ class ReviewController extends Controller
         $review->game_id = $request->input('game');
         $review->user_id = Auth::User()->id;
         $review->difficulty = $request->input('difficulty');
+        $review->body = $request->input('body');
         if( $request->input('again') == 1){
             
             $review->playAgain = TRUE;
@@ -41,8 +42,6 @@ class ReviewController extends Controller
         }
         $review->save();
 
-        // return redirect()
-        //     ->route('games')
-        //     ->with('success', "Successfully created game entry: {$request->input('name')}");
+        return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Added Review for {$request->input('game')}");
     }
 }

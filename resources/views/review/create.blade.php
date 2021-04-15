@@ -11,18 +11,18 @@ New Review for {{$game->name}}
     {{-- hidden input - game --}}
     <input name="game" type="hidden" value="{{$game->id}}">
 
-    {{-- difficulty --}}
-    <div class="mb-3">
+     {{-- difficulty --}}
+     <div class="mb-3">
         <label for="difficulty" class="form-label">How difficult was it to play {{$game->name}}? (Scale: 1- 10)</label>
-        <input type="number" difficulty="difficulty" id="difficulty" class="form-control"  value="{{ old('difficulty')}}">
+        <input type="number" name="difficulty" id="difficulty" class="form-control"  value="{{ old('difficulty')}}">
         @error('difficulty')
             <small class="text-danger">{{$message}}</small>
         @enderror
     </div>
 
     <div class="mb-3">
-        <input type="checkbox" id="again" name="again" value="1" >
         <label for="again"> Would you play this game again?</label>
+        <input type="checkbox" id="again" name="again" value="1" {{ old('again') ? 'checked': true}}>
     </div>
 
     <div class="mb-3">

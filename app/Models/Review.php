@@ -4,13 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Review extends Model
 {
     use HasFactory;
 
-    // public function Game()
-    // {
-    //     return $this->belongsTo(Game::class);
-    // }
+    public $timestamps = false;
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function Game()
+    {
+        return $this->belongsTo(Game::class);
+    }
+
 }

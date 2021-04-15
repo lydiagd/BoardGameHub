@@ -14,20 +14,23 @@ class GameController extends Controller
 {
     public function index(){
 
-        $games = Game::With(['user'])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
+        $games = Game::With(['user', ])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
+        // ->join('reviews', 'reviews.game_id', '=', 'games.id')
         ->select('*', 'games.name as gameName', 'games.id as id')->orderBy('games.name')->get();
 
-        $difficulty = DB::table('reviews')->avg('difficulty');
 
         return view('game.games', [
             'games' => $games,
-            'difficulty' => $difficulty,
+            // 'reviews' => $reviews,
+            // 'difficulty' => $difficulty,
         ]);
     }
 
     public function show($id){
 
         $game = Game::Where('id', '=', $id)->first();
+
+        $review1 = Review::Where('game_id', '=', $id)->first();
 
         $reviews = Review::Where('game_id', '=', $id);
 
@@ -37,6 +40,7 @@ class GameController extends Controller
             'game' => $game,
             'reviews' => $reviews,
             'user' => $user,
+            'review1' => $review1,
         ]);
 
     }
