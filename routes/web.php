@@ -27,6 +27,9 @@ Route::get('/games/{id}', 'App\Http\Controllers\GameController@show')->name('gam
 Route::get('/games/newgame/create', 'App\Http\Controllers\GameController@create')->name('games.create');
 Route::post('/games', 'App\Http\Controllers\GameController@store')->name('games.store');
 
+Route::get('/games/search', 'App\Http\Controllers\GameController@search')->name('games.search');
+
+
 Route::get('/games/{id}/review', 'App\Http\Controllers\ReviewController@create')->name('review.create');
 Route::post('/games/{id}', 'App\Http\Controllers\ReviewController@store')->name('review.store');
 

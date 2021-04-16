@@ -3,25 +3,47 @@
 @section('title', 'Games List')
 <title align="right">All Games </title>
 @section('content')
-<style>
-    a:link {
-      color: rgb(204, 184, 235);
-      background-color: transparent;
-      text-decoration: none;
-    }    
-    a:hover {
-      color: rgba(230, 202, 217, 0.719);
-      background-color: transparent;
-      text-decoration: underline;
-    }
-    </style>
+
+
+{{-- search bar --}}
+<form action="{{ route('games.search')}}" method="POST" role="search">
+    {{ csrf_field() }}
+    <div class="input-group" >
+        <input type="text" class="form-control" name="query" id="query"
+            placeholder="Search Games" style="padding-left:5px;padding-bottom:3px;"> <span class="input-group-btn"></span>
+
+
+        <select 
+            name="category" id="category" class="form-select" style="padding-left:-3px;padding-bottom:3px;">
+            <option value="">-- Search by Category --</option>
+            @foreach($categories as $category)
+                <option value="{{$category->id}}"
+                    {{ (string)$category->id === old('category') ? "Selected" : "" }}
+                    >
+                    {{-- can also use just a == instead --}}
+                    {{$category->name}}
+                </option>
+            @endforeach
+        </select>
+        @error('category')
+            <small class="text-danger">{{$message}}</small>
+        @enderror
+
+    <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span>
+        SEARCH
+    </button>
+    </div>
+
+        
+</form>
     
 <body style="background-color:rgb(151, 208, 223);">
     <div class="text-end mb-3" align="right" >
     @if(Auth::check())
-        <a href="{{ route('games.create')}}"> Add a new game entry </a>
+        <a href="{{ route('games.create')}} style="color: #570a46c9""> Add a new game entry </a>
     @else
-    <a href="{{ route('auth.login')}}"> Add a new game entry </a>
+    <a href="{{ route('auth.login')}}" style="color: #570a46c9"> Add a new game entry </a>
     @endif
 
     <table class="table table-striped">
@@ -29,7 +51,7 @@
         <tr>
             <th>Game:</th>
             <th>Player Limit:</th>
-            <th>Age Requirement:</th>
+            <th>Ages:</th>
             <th>Category:</th>
             <th>Added By:</th>
             <th>Average Difficulty </th>
@@ -38,8 +60,11 @@
         <tbody>
         @foreach($games as $game)
             <tr>
-                <td>
-                    <a href="{{ route('games.show', ['id' => $game->id ])}}">{{$game->gameName}} </a>
+                <td style="padding-left:5px;padding-bottom:26px;">
+                    <strong style="font-size:20px;">
+                        <a href="{{ route('games.show', ['id' => $game->id ])}}" style="color: #570a46c9">{{$game->gameName}} </a></strong>
+                    <br/>
+                    
                 </td>
                 <td>
                     {{$game->playerMin}}-{{$game->playerMax}} players

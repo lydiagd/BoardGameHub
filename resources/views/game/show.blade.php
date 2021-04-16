@@ -38,7 +38,7 @@
     <h3 align="center"> Reviews </h3>
     {{-- <table class="table table-striped"> --}}
         <td>
-            <a href="{{ route('review.create', ['id' => $game->id ])}}">Add a New Review</a>
+            <a href="{{ route('review.create', ['id' => $game->id ])}} style="color: #570a46c9"">Add a New Review</a>
         </td>
         <tbody>
 

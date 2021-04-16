@@ -28,7 +28,7 @@ class Game extends Model
     public function averageDifficulty()
     {
         $average = DB::table('reviews')->where('game_id', $this->id)->avg('difficulty');
-        return round($average);
+        return round($average, 1);
         
     }
 }

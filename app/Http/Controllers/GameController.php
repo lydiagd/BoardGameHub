@@ -15,13 +15,14 @@ class GameController extends Controller
     public function index(){
 
         $games = Game::With(['user', ])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
-        // ->join('reviews', 'reviews.game_id', '=', 'games.id')
         ->select('*', 'games.name as gameName', 'games.id as id')->orderBy('games.name')->get();
+
+        $categories = Category::All();
 
 
         return view('game.games', [
             'games' => $games,
-            // 'reviews' => $reviews,
+            'categories' => $categories,
             // 'difficulty' => $difficulty,
         ]);
     }
@@ -41,6 +42,27 @@ class GameController extends Controller
             'reviews' => $reviews,
             'user' => $user,
             'review1' => $review1,
+        ]);
+
+    }
+
+    public function search(Request $request){
+
+        $request->validate([
+            'query' => 'max:100', 
+            'category' => 'exists:categories,id',
+        ]); 
+
+        //query here
+        $searchBar = "%".$request->input('query')."%";
+        $results_search = Game::query()->where('name', 'LIKE', $searchBar)->get();
+
+        $results_category = Game::Where('category_id', '=', $request->input('category'));
+
+
+        return view('game.search', [
+            'results_search' => $results_search,
+            'results_category' => $results_category,
         ]);
 
     }
