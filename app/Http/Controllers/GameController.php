@@ -31,9 +31,9 @@ class GameController extends Controller
 
         $game = Game::Where('id', '=', $id)->first();
 
-        $review1 = Review::Where('game_id', '=', $id)->first();
+        // $review1 = Review::Where('game_id', '=', $id)->first();
 
-        $reviews = Review::Where('game_id', '=', $id);
+        $reviews = Review::Where('game_id', '=', $id)->orderBy('reviews.id', 'desc')->get();
 
         $user = User::Where('id', '=', $game->user_id)->first();
 
@@ -41,7 +41,6 @@ class GameController extends Controller
             'game' => $game,
             'reviews' => $reviews,
             'user' => $user,
-            'review1' => $review1,
         ]);
 
     }
@@ -50,19 +49,34 @@ class GameController extends Controller
 
         $request->validate([
             'query' => 'max:100', 
-            'category' => 'exists:categories,id',
+            // 'category' => 'exists:categories,id',
         ]); 
 
         //query here
-        $searchBar = "%".$request->input('query')."%";
-        $results_search = Game::query()->where('name', 'LIKE', $searchBar)->get();
+        if(is_null($request->input('query')))
+        {
+            $results_search = null;
+        }
+        else{
+            $searchBar = "%".$request->input('query')."%";
+            $results_search = Game::query()->where('name', 'LIKE', $searchBar)->orderBy('games.name')->get();
+        }
 
-        $results_category = Game::Where('category_id', '=', $request->input('category'));
+        // if(is_null($request->input('category')))
+        // {
+        //     $results_category = null;
+        // }
+        // else {
+        $results_category = Game::Where('category_id', '=', $request->input('category'))->orderBy('games.name')->get();
+        // }
+        $category = Category::Find($request->input('category'));
 
 
         return view('game.search', [
-            'results_search' => $results_search,
             'results_category' => $results_category,
+            'results_search' => $results_search,
+            'category' => $category,
+            'search' => $request->input('query'),
         ]);
 
     }

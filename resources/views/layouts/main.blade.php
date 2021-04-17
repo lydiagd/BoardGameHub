@@ -21,6 +21,24 @@
         })
         </script>
         <style>
+            .button {
+                font: bold 11px Arial;
+                text-decoration: none;
+                background-color: #EEEEEE;
+                color: #333333;
+                padding: 6px 14px 6px 14px;
+                border-top: 1px solid #CCCCCC;
+                border-right: 1px solid #333333;
+                border-bottom: 1px solid #333333;
+                border-left: 1px solid #CCCCCC;
+            }
+
+            .box{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
             body {
         overflow-x: hidden;
         }
@@ -60,80 +78,82 @@
         </style>    
     </head>
     <body>
-        <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">Menu </div>
-        <div class="list-group list-group-flush">
-            <a href="{{ route('main') }}" class="list-group-item list-group-item-action bg-light">Main Dashboard</a>
-            <a href="{{ route('about') }}" class="list-group-item list-group-item-action bg-light">About</a>
-            <a href="{{ route('games')}}" class="list-group-item list-group-item-action bg-light">All Games</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">User's Favorites</a>
-            @if (Auth::check())
-                    <a href="{{ route('profile.index') }}" class="list-group-item list-group-item-action bg-light">Profile</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">My Games</a>
-                    <form method="post" action="{{ route('auth.logout') }}">
-                        @csrf
-                        <button type="submit" class="list-group-item list-group-item-action bg-light">Logout</button>
-                    </form>
-            @else
-                    <a href="{{ route('registration.index') }}" class="list-group-item list-group-item-action bg-light">Sign up</a>
-                    <a href="{{ route('auth.loginForm') }}" class="list-group-item list-group-item-action bg-light">Login</a>
-            @endif
-        </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                @if (Auth::check())
-                    <p style="color:rgb(81, 117, 216);">Hello, {{Auth::user()->name}} </p>
-                @endif
-                <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">My Favorites</a>
-                </li>
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-                </li>
-            </ul>
-            </div>
-        </nav>
-
-        <div class="col-9">
-                <header>
-                    <h2>@yield('title')</h2>
-                </header>
-                @if (session('error'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                <main>
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
+        {{-- <div class="container mt-3 mb-3">
+            <div class="row"> --}}
+                <div class="d-flex" id="wrapper">
+                <!-- Sidebar -->
+                <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="sidebar-heading">Menu </div>
+                <div class="list-group list-group-flush">
+                    <a href="{{ route('main') }}" class="list-group-item list-group-item-action bg-light">Main Dashboard</a>
+                    <a href="{{ route('about') }}" class="list-group-item list-group-item-action bg-light">About</a>
+                    <a href="{{ route('games')}}" class="list-group-item list-group-item-action bg-light">All Games</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">User's Favorites</a>
+                    @if (Auth::check())
+                            <a href="{{ route('profile.index') }}" class="list-group-item list-group-item-action bg-light">Profile</a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">My Games</a>
+                            <form method="post" action="{{ route('auth.logout') }}">
+                                @csrf
+                                <button type="submit" class="list-group-item list-group-item-action bg-light">Logout</button>
+                            </form>
+                    @else
+                            <a href="{{ route('registration.index') }}" class="list-group-item list-group-item-action bg-light">Sign up</a>
+                            <a href="{{ route('auth.loginForm') }}" class="list-group-item list-group-item-action bg-light">Login</a>
                     @endif
-                    @yield('content')
-                </main>
-            </div>
+                </div>
+                </div>
+                <!-- /#sidebar-wrapper -->
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                        
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                                @if (Auth::check())
+                                    <p style="color:rgb(81, 117, 216);">Hello, {{Auth::user()->name}} </p>
+                                @endif
+                                <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="#">My Favorites</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
 
-        <!-- /#page-content-wrapper -->
-        </div>
+                    <div class="col-9">
+                        <header>
+                            <h2>@yield('title')</h2>
+                        </header>
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <main>
+                            @if (session('success'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @yield('content')
+                        </main>
+                    </div>
+                </div>
+            {{-- </div>
+        </div> --}}
         <!-- /#wrapper -->
     </body>
 </html>

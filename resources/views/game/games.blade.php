@@ -11,7 +11,9 @@
     <div class="input-group" >
         <input type="text" class="form-control" name="query" id="query"
             placeholder="Search Games" style="padding-left:5px;padding-bottom:3px;"> <span class="input-group-btn"></span>
-
+        @error('query')
+            <small class="text-danger">{{$message}}</small>
+        @enderror
 
         <select 
             name="category" id="category" class="form-select" style="padding-left:-3px;padding-bottom:3px;">
@@ -20,7 +22,6 @@
                 <option value="{{$category->id}}"
                     {{ (string)$category->id === old('category') ? "Selected" : "" }}
                     >
-                    {{-- can also use just a == instead --}}
                     {{$category->name}}
                 </option>
             @endforeach
@@ -34,9 +35,10 @@
         SEARCH
     </button>
     </div>
-
         
 </form>
+
+
     
 <body style="background-color:rgb(151, 208, 223);">
     <div class="text-end mb-3" align="right" >
@@ -80,7 +82,7 @@
                 </td>
                 <td>
                     @if($game->averageDifficulty() > 0)
-                        {{$game->averageDifficulty()}} / 10
+                        {{$game->averageDifficulty()}} / 10 Difficulty
                     @else
                         No rating yet
                     @endif

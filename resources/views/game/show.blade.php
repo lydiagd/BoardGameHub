@@ -42,23 +42,22 @@
         </td>
         <tbody>
 
-            {{-- @foreach($reviews as $review) --}}
-            <td>
-                HERE {{$review1->difficulty}}
-            </td>
-            <div style="background-color:rgba(238, 222, 222, 0.047); text-align:center; vertical-align: middle; padding:40px 0;">
-                <tr>
-                    <td>
-                        Difficulty: {{$review1->difficulty}}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Review Content: {{$review1->body}}
-                    </td>
-                </tr>
+            @foreach($reviews as $review)
+            <div style="background-color:rgba(238, 222, 222, 0.047); text-align:center; font-size:16px; vertical-align: middle; padding:40px 0;">
+                <div class="row" style="text-align:center">
+                    <h6>Difficulty: {{$review->difficulty}}</h6>
+                    <tr>
+                        <p> Would Play Again: {{$review->playAgain}} </p>
+                    </tr>
+                </div>
+                <div class="box" style="text-align:center">
+                    {{-- <td> --}}
+                        <h6> Review Content:     </h6>
+                        <p> {{$review->body}} </p>
+                    {{-- </td> --}}
+                </div>
             </div>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     {{-- </table> --}}
 </body>
