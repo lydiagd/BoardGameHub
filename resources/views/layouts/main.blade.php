@@ -78,8 +78,6 @@
         </style>    
     </head>
     <body>
-        {{-- <div class="container mt-3 mb-3">
-            <div class="row"> --}}
                 <div class="d-flex" id="wrapper">
                 <!-- Sidebar -->
                 <div class="bg-light border-right" id="sidebar-wrapper">
@@ -107,10 +105,11 @@
                 <div id="page-content-wrapper">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                         
+                        <button class="button" id="menu-toggle">Toggle Menu</button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                                 @if (Auth::check())
-                                    <p style="color:rgb(81, 117, 216);">Hello, {{Auth::user()->name}} </p>
+                                    <a style="color:rgb(81, 117, 216);">Hello, {{Auth::user()->name}} </a>
                                 @endif
                                 <li class="nav-item active">
                                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>

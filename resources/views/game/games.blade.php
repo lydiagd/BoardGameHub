@@ -87,13 +87,14 @@
                         No rating yet
                     @endif
                 </td>
-                {{-- <td> make it so if you're authorized to edit entry, you can do so
-                    @can('update', $album)
-                    <a href="{{ route('albumE.edit', ['id' => $album->alb_id ])}}">
-                        Edit
+                <td> 
+                    {{-- make it so if you're authorized to edit entry, you can do so --}}
+                    @can('update', $game)
+                    <a href="{{ route('games.edit', ['id' => $game->id ])}}" class="button">
+                        Edit Entry
                     </a>
                     @endcan
-                </td> --}}
+                </td>
             </tr>
             @endforeach
         </tbody>

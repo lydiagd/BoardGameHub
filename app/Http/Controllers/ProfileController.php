@@ -13,4 +13,9 @@ class ProfileController extends Controller
             'user' => Auth::user(),
         ]);
     }
+
+    public function favorites()
+    {
+
+    }
 }

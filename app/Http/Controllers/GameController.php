@@ -45,6 +45,8 @@ class GameController extends Controller
 
     }
 
+    // SEARCHING
+
     public function search(Request $request){
 
         $request->validate([
@@ -62,13 +64,8 @@ class GameController extends Controller
             $results_search = Game::query()->where('name', 'LIKE', $searchBar)->orderBy('games.name')->get();
         }
 
-        // if(is_null($request->input('category')))
-        // {
-        //     $results_category = null;
-        // }
-        // else {
         $results_category = Game::Where('category_id', '=', $request->input('category'))->orderBy('games.name')->get();
-        // }
+
         $category = Category::Find($request->input('category'));
 
 
@@ -80,6 +77,8 @@ class GameController extends Controller
         ]);
 
     }
+
+    // CREATING
 
     public function create(){
 
@@ -122,6 +121,55 @@ class GameController extends Controller
         return redirect()
             ->route('games')
             ->with('success', "Successfully created game entry: {$request->input('name')}");
+
+    }
+
+    // editing entries
+    public function edit($id)
+    {
+        $game = Game::Where('id', '=', $id)->first();
+        $categories = Category::All();
+
+        return view('game.edit', [
+            'categories' => $categories,
+            'game' => $game,
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:100', 
+            'category' => 'required|exists:categories,id',
+            'link' => 'required|max:200|unique:App\Models\Game,link',
+            'playerMin' => 'required|integer|digits_between:1,100|gt:0',
+            'playerMax' => 'required|integer|gt:0|gte:playerMin|digits_between:1,100',
+            'age' => 'required|integer|gt:0|lte:21',
+            'length' => 'required|integer',
+            'description' => 'required'
+        ]); 
+
+        $game = Game::where('id', '=', $id)->first();
+        
+        $this->authorize('update', $game);
+
+        $game->name = $request->input('name');
+        $game->category_id = $request->input('category');
+        $game->link = $request->input('link');
+        $game->playerMin = $request->input('playerMin');
+        $game->playerMax = $request->input('playerMax');
+        $game->ageMin = $request->input('age');
+        $game->length = $request->input('length');
+        $game->description = $request->input('description');
+        $game->user_id = Auth::User()->id;
+        $game->save();
+
+
+        return redirect()
+            ->route('games')
+            ->with('success', "Successfully created game entry: {$request->input('name')}");
+
 
     }
 }
