@@ -22,4 +22,8 @@ class Review extends Model
         return $this->belongsTo(Game::class);
     }
 
+    public function getUser(){
+        return User::Where('id', '=', $this->user_id)->first()->name;
+    }
+
 }

@@ -36,7 +36,10 @@
             .box{
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                /* align-items: center; */
+                background-color: rgba(207, 102, 181, 0.322);
+                /* color: white;
+                padding: 1em 1.5em; */
             }
 
             body {

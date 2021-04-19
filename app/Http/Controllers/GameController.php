@@ -14,7 +14,7 @@ class GameController extends Controller
 {
     public function index(){
 
-        $games = Game::With(['user', ])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
+        $games = Game::With(['user'])->join('categories', 'categories.id', '=', 'games.category_id')->join('users', 'users.id', '=', 'games.user_id')
         ->select('*', 'games.name as gameName', 'games.id as id')->orderBy('games.name')->get();
 
         $categories = Category::All();
@@ -33,7 +33,10 @@ class GameController extends Controller
 
         // $review1 = Review::Where('game_id', '=', $id)->first();
 
-        $reviews = Review::Where('game_id', '=', $id)->orderBy('reviews.id', 'desc')->get();
+        $reviews = Review::Where('game_id', '=', $id)
+        // ->join('user', 'user.id', '=', 'review.user_id')
+        // ->select('*', 'reviews.id as id', 'users.name as username')
+        ->orderBy('reviews.id', 'desc')->get();
 
         $user = User::Where('id', '=', $game->user_id)->first();
 
@@ -137,17 +140,18 @@ class GameController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
         $request->validate([
             'name' => 'required|max:100', 
             'category' => 'required|exists:categories,id',
-            'link' => 'required|max:200|unique:App\Models\Game,link',
+            'link' => 'required|max:200',
             'playerMin' => 'required|integer|digits_between:1,100|gt:0',
             'playerMax' => 'required|integer|gt:0|gte:playerMin|digits_between:1,100',
             'age' => 'required|integer|gt:0|lte:21',
             'length' => 'required|integer',
             'description' => 'required'
+            // do this for link: https://stackoverflow.com/questions/45810009/laravel-conditional-unique-validation
         ]); 
 
         $game = Game::where('id', '=', $id)->first();
@@ -168,7 +172,7 @@ class GameController extends Controller
 
         return redirect()
             ->route('games')
-            ->with('success', "Successfully created game entry: {$request->input('name')}");
+            ->with('success', "Successfully edited game entry: {$request->input('name')}");
 
 
     }

@@ -43,18 +43,18 @@
         <tbody>
 
             @foreach($reviews as $review)
-            <div style="background-color:rgba(238, 222, 222, 0.047); text-align:center; font-size:16px; vertical-align: middle; padding:40px 0;">
-                <div class="row" style="text-align:center">
-                    <h6>Difficulty: {{$review->difficulty}}</h6>
-                    <tr>
-                        <p> Would Play Again: {{$review->playAgain}} </p>
-                    </tr>
-                </div>
-                <div class="box" style="text-align:center">
-                    {{-- <td> --}}
-                        <h6> Review Content:     </h6>
-                        <p> {{$review->body}} </p>
-                    {{-- </td> --}}
+            <div style="background-color:rgba(238, 222, 222, 0.047); text-align:left; font-size:16px; vertical-align: middle; padding:10px 0;">
+   
+                <h4>{{$review->getUser()}}</h4> 
+                <p><br>Difficulty: {{$review->difficulty}}</p>
+
+                <div class="box" >
+
+                    <p>Would Play Again: {{$review->playAgain}}
+                        <span style = "display:block; font-size:16px;">Review Content:</span></p>
+                   
+                    <p><br> {{$review->body}} </p>
+
                 </div>
             </div>
             @endforeach
