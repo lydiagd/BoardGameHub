@@ -43,7 +43,7 @@
 <body style="background-color:rgb(151, 208, 223);">
     <div class="text-end mb-3" align="left" >
     {{-- @if(Auth::check()) --}}
-        <a href="{{ route('games.create')}}"" style="color: #570a46c9" class="btn btn-info"> Add a new game entry </a>
+        <a href="{{ route('games.create')}}"" style="color: #ffffffc9" class="btn btn-info"> Add a new game entry </a>
     {{-- @else
     <a href="{{ route('auth.login')}}" style="color: #570a46c9" > Add a new game entry </a>
     @endif --}}

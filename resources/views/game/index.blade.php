@@ -19,7 +19,6 @@
   </head>
 
 <div class="text-end mb-3" vertical-align:top>
-  <p></p>
     <h3><a href="{{ route('games')}}"> View All Games </a> 
       <span class="tab"></span><a href="{{ route('auth.login')}}"> Sign In </a>
       <span class="tab"></span><a href="{{ route('about')}}"> About This Page </a></h3>
