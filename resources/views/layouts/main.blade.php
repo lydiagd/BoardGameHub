@@ -27,6 +27,7 @@
                 background-color: #EEEEEE;
                 color: #333333;
                 padding: 6px 14px 6px 14px;
+                display: inline-block;
                 border-top: 1px solid #CCCCCC;
                 border-right: 1px solid #333333;
                 border-bottom: 1px solid #333333;
@@ -109,13 +110,13 @@
                     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                         
                         <button class="button" id="menu-toggle">Toggle Menu</button>
+                        @if (Auth::check())
+                            <a style="color:rgb(81, 117, 216);display:block;padding:10px" >Hello, {{Auth::user()->name}} </a>
+                        @endif
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                                @if (Auth::check())
-                                    <a style="color:rgb(81, 117, 216);">Hello, {{Auth::user()->name}} </a>
-                                @endif
                                 <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="#">Main Page <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                 <a class="nav-link" href="#">My Favorites</a>

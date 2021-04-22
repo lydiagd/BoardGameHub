@@ -65,8 +65,6 @@
                 <td style="padding-left:5px;padding-bottom:26px;">
                     <strong style="font-size:20px;">
                         <a href="{{ route('games.show', ['id' => $game->id ])}}" style="color: #570a46c9">{{$game->gameName}} </a></strong>
-                    <br/>
-                    
                 </td>
                 <td>
                     {{$game->playerMin}}-{{$game->playerMax}} players

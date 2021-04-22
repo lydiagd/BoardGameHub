@@ -7,7 +7,7 @@
 @if($games->count() == 0)
 <body style="background-color:rgba(182, 240, 248, 0.712);">
     <div class="text-end mb-3" align="left" >
-        <h3> No favorites added yet! </h3>
+        <h4> <i> No favorites added yet! </i> </h4>
     </div>
 </body>
 

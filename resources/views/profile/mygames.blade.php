@@ -4,7 +4,7 @@
 <title align="right">My Game List</title>
 @section('content')
 
-    
+
 <body style="background-color:rgba(182, 240, 248, 0.712);">
     <div class="text-end mb-3" align="left" >
 
@@ -13,15 +13,26 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Entries:</th>
+            <th>Entries: {{$games->count()}}</th>
         </tr>
         </thead>
         <tbody>
+        @if($games->count() == 0)
+            <body style="background-color:rgba(182, 240, 248, 0.712);">
+                <div class="text-end mb-3" align="left" >
+                    <h4><i> You have not added any games to the Hub yet </i> </h4>
+                </div>
+            </body>
+
+        @else  
         @foreach($games as $game)
             <tr>
                 <td style="padding-left:5px;padding-bottom:26px;">
                     <strong style="font-size:20px;">
                         {{$game->name}}</strong>                    
+                </td>
+                <td>
+                    <i>Updated at: {{$game->updated_at}} </i>
                 </td>
                 <td> 
                     <div class="btn-group">
@@ -37,8 +48,10 @@
                 </td>
             </tr>
             @endforeach
+        @endif
         </tbody>
     </table>
     </div>
 </body>
+
 @endsection

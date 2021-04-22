@@ -44,7 +44,7 @@ Route::middleware(['custom-auth2'])->group(function () {
 Route::middleware(['custom-auth'])->group(function () {
     Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
     Route::get('/profile/mygames', 'App\Http\Controllers\ProfileController@mygames')->name('profile.mygames');
-    Route::get('/profile/favorites', 'App\Http\Controllers\ProfileController@favorites')->name('profile.favorites');
+    Route::get('/profile/favorites', 'App\Http\Controllers\FavoriteController@index')->name('profile.favorites');
     Route::post('/logout', 'App\Http\Controllers\AuthController@logout')->name('auth.logout');
 
     Route::get('/games/newgame/create', 'App\Http\Controllers\GameController@create')->name('games.create');
@@ -56,5 +56,8 @@ Route::middleware(['custom-auth'])->group(function () {
     
     Route::get('/games/{id}/review', 'App\Http\Controllers\ReviewController@create')->name('review.create');
     Route::post('/games/{id}', 'App\Http\Controllers\ReviewController@store')->name('review.store');
+
+    Route::post('/games/favorite/{id}', 'App\Http\Controllers\FavoriteController@add')->name('favorite.add');
+    
 });
 

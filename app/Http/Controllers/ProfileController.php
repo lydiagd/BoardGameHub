@@ -25,15 +25,5 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function favorites()
-    {
-        $games = Favorite::With(['games', 'users'])->join('users', 'favorites.user_id', '=', 'users.id')
-        ->join('games', 'games.id', '=', 'favorites.game_id')
-        ->select('*', 'games.name as gameName', 'games.id as id', 'users.name as userName')
-        ->orderBy('games.name')->get();
-
-        return view('profile.favorites', [
-            'games' => $games,
-        ]);
-    }
+    
 }

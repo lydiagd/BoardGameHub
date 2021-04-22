@@ -99,7 +99,7 @@ class GameController extends Controller
             'category' => 'required|exists:categories,id',
             'link' => 'required|max:200|unique:App\Models\Game,link',
             'playerMin' => 'required|integer|digits_between:1,100|gt:0',
-            'playerMax' => 'required|integer|gt:0|gte:playerMin|digits_between:1,100',
+            'playerMax' => 'required|integer|gt:0|gte:playerMin|lte:100',
             'age' => 'required|integer|gt:0|lte:21',
             'length' => 'required|integer',
             'description' => 'required'
@@ -147,7 +147,7 @@ class GameController extends Controller
             'category' => 'required|exists:categories,id',
             'link' => 'required|max:200',
             'playerMin' => 'required|integer|digits_between:1,100|gt:0',
-            'playerMax' => 'required|integer|gt:0|gte:playerMin|digits_between:1,100',
+            'playerMax' => 'required|integer|gt:0|gte:playerMin|lte:100',
             'age' => 'required|integer|gt:0|lte:21',
             'length' => 'required|integer',
             'description' => 'required'
@@ -171,7 +171,7 @@ class GameController extends Controller
 
 
         return redirect()
-            ->route('games')
+            ->route('games.show', ['id' => $game->id ])
             ->with('success', "Successfully edited game entry: {$request->input('name')}");
 
 

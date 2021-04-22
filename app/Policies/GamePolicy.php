@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Game;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class GamePolicy
 {
@@ -30,7 +31,7 @@ class GamePolicy
      */
     public function view(User $user, Game $game)
     {
-        //
+        return Auth::check();
     }
 
     /**
@@ -54,6 +55,12 @@ class GamePolicy
     public function update(User $user, Game $game)
     {
         return $user->id === $game->user_id;
+    }
+
+    public function add()
+    {
+        dd(Auth::check());
+        return Auth::check();
     }
 
     /**

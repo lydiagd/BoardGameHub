@@ -15,7 +15,7 @@
             <th> {{round($game->length)}} minutes long </th>
         </tr>
         <tr>
-            <th>Category: {{$game->category->name}} </th>
+            <th>Category: {{$game->category->name}}  </th>
         </tr>
         <tr>
         </tr>
@@ -26,6 +26,16 @@
                     Link to play: {{$game->link}}
                 </td>
             
+            </tr>
+            <tr>
+                <td>
+                    @can('view', $game)
+                    <span style="float:right;">
+                        <strong style="font-size:20px;">
+                            <a href="{{ route('favorite.add', ['id' => $game->id ])}}" class="btn btn-success" style="color: #ecd030c9">Add to Favorites </a></strong>
+                    </span>
+                    @endcan
+                </td>
             </tr>
 
         </tbody>

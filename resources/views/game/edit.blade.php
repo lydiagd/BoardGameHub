@@ -23,7 +23,7 @@
                 <option value="">-- Select Category --</option>
                 @foreach($categories as $category)
                     <option value="{{$category->id}}"
-                        {{ (string)$category->id === old('category') ? "Selected" : $game->name }}
+                        {{ (int)$category->id === (int)old('category', $game->category_id) ? "Selected" : "" }}
                         >
                         {{-- can also use just a == instead --}}
                         {{$category->name}}
@@ -76,7 +76,7 @@
         {{-- LENGTH --}}
         <div class="mb-3">
             <label for="length" class="form-label">Length of the Game (in minutes)</label>
-            <input type="number" name="length" id="length" class="form-control" value="{{ old('length', $game->length)}}">
+            <input type="number" name="length" id="length" class="form-control" value="{{ old('length', round($game->length))}}">
             @error('length')
                 <small class="text-danger">{{$message}}</small>
             @enderror
@@ -94,7 +94,7 @@
         <button type="submit" class="btn btn-primary">
             Update Game Entry
         </button>
-        <a class="button" href="{{ route('profile.index')}}">
+        <a class="button" href="{{ route('games.show', ['id' => $game->id ])}}">
             Cancel
         </a>
     </form>
