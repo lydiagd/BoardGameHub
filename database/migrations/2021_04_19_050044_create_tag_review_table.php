@@ -13,9 +13,18 @@ class CreateTagReviewTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_review', function (Blueprint $table) {
-            $table->id();
+        // Schema::create('tag_review', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->timestamps();
+        // });
+
+        Schema::table('favorites', function (Blueprint $table) {
             $table->timestamps();
+        });
+
+        Schema::table('games', function (Blueprint $table) {
+            $table->softDeletes();
+
         });
     }
 
@@ -26,6 +35,8 @@ class CreateTagReviewTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_review');
+        Schema::table('games', function (Blueprint $table) {
+            // $table->dropSoftDeletes();
+        });
     }
 }

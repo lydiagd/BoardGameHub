@@ -37,6 +37,9 @@ New Review for {{$game->name}}
     <button type="submit" class="btn btn-primary">
         Submit Review
     </button>
+    <a class="button" href="{{ route('games.show', ['id' => $game->id ])}}">
+        Cancel
+    </a>
 </form>
 @endsection
 

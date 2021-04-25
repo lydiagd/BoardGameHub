@@ -42,7 +42,7 @@
                             Edit Entry
                         </a>
                         @endcan
-                        <a href="{{ route('games.show', ['id' => $game->id ])}}" class="btn btn-danger btn-sm">Delete </a></strong>
+                        <a href="{{ route('profile.deleteGame', ['id' => $game->id ])}}" class="btn btn-danger btn-sm">Delete </a></strong>
                
                     </div>
                 </td>

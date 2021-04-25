@@ -12,9 +12,10 @@ class FavoriteController extends Controller
 
     public function index()
     {
-        $games = Favorite::With(['games', 'users'])->join('users', 'favorites.user_id', '=', 'users.id')
+        $games = Favorite::With(['game', 'user'])->join('users', 'favorites.user_id', '=', 'users.id')
         ->join('games', 'games.id', '=', 'favorites.game_id')
-        ->select('*', 'games.name as gameName', 'games.id as id', 'users.name as userName')
+        ->select('*', 'games.name as gameName', 'games.id as game_id', 'favorites.id as fav_id', 
+        'favorites.created_at as created_at')
         ->orderBy('games.name')->get();
 
         return view('profile.favorites', [
@@ -37,5 +38,46 @@ class FavoriteController extends Controller
         return redirect()
             ->route('games.show', ['id' => $id ])
             ->with('success', "Successfully added {$game->name} to your favorites list");
+    }
+
+    public function removeForm($id){
+        // $favorite = Favorite::With(['game'])
+        // ->join('games', 'games.id', '=', 'favorites.game_id')->where('id', '=', $id)
+        // ->select('*', 'games.name as gameName', 'games.id as id')->get();
+
+        $favorite = Favorite::Where('id', '=', $id)->first();
+
+        $game = Game::Where('id', '=', $favorite->game_id)->first();
+
+
+        return view('profile.deleteFavorite', [
+            'favorite' => $favorite,
+            'game' => $game,
+        ]);
+    }
+
+    public function remove($id, Request $request){
+
+        if($request->submit == "Delete")
+        {
+            //check if authorized to remove
+        
+            $favorite = Favorite::Where('id', '=', $id)->first();
+
+            $game = Game::Where('id', '=', $favorite->game_id)->first();
+
+            $favorite->delete();
+            return redirect()
+            ->route('profile.favorites')
+            ->with('success', "Removed {$game->name} from your favorites list");
+    
+        }
+        else if($request->submit == "Cancel")
+        {
+            return redirect()
+            ->route('profile.favorites')->with('success', "Canceled removal");
+            
+        }
+
     }
 }

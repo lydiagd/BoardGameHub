@@ -25,5 +25,20 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function deleteGame($id)
+    {
+        $game = Game::Where('id', '=', $id)->first();
+
+        return view('profile.deleteGame', [
+            'game' => $game,
+        ]);
+    }
+
+    public function deleted($id, Request $request)
+    {
+        
+    }
+
+
     
 }

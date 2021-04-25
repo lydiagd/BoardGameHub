@@ -118,20 +118,22 @@
                                 <li class="nav-item active">
                                 <a class="nav-link" href="#">Main Page <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                 <a class="nav-link" href="#">My Favorites</a>
-                                </li>
+                                </li> --}}
+                                @if(Auth::check())
                                 <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdown
+                                    Options
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="{{ route('profile.favorites') }}">My Favorites</a>
+                                    <a class="dropdown-item" href="{{ route('profile.mygames') }}">My Games</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="{{ route('auth.logout') }}" style="color:rgb(134, 7, 7)">Log Out</a>
                                 </div>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </nav>

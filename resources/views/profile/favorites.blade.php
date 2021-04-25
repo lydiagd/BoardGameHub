@@ -19,11 +19,12 @@
         <thead>
         <tr>
             <th>Game:</th>
-            <th>Player Limit:</th>
+            <th>Link:</th>
+            {{-- <th>Player Limit:</th>
             <th>Ages:</th>
             <th>Category:</th>
             <th>Added By:</th>
-            <th>Average Difficulty </th>
+            <th>Average Difficulty </th> --}}
         </tr>
         </thead>
         <tbody>
@@ -31,28 +32,27 @@
             <tr>
                 <td style="padding-left:5px;padding-bottom:26px;">
                     <strong style="font-size:20px;">
-                        <a href="{{ route('games.show', ['id' => $game->id ])}}" style="color: #570a46c9">{{$game->gameName}} </a></strong>
+                        <a href="{{ route('games.show', ['id' => $game->game_id ])}}" style="color: #570a46c9">{{$game->gameName}} </a></strong>
                     <br/>
                     
                 </td>
-                <td>
+                {{-- <td>
                     {{$game->playerMin}}-{{$game->playerMax}} players
                 </td>
                 <td>
                     {{$game->ageMin}}+
-                </td>
-                <td>
+                </td> --}}
+                {{-- <td>
                     {{$game->category->name}}
+                </td> --}}
+                <td>
+                    {{$game->link}}
                 </td>
                 <td>
-                    {{$game->user->name}}
+                    Added at {{$game->created_at}}
                 </td>
                 <td>
-                    @if($game->averageDifficulty() > 0)
-                        {{$game->averageDifficulty()}} / 10 Difficulty
-                    @else
-                        No rating yet
-                    @endif
+                    <a href="{{ route('favorite.removeForm', ['id' => $game->fav_id ])}}" class="btn btn-danger btn-sm">Remove from List </a></strong>
                 </td>
             </tr>
             @endforeach

@@ -10,12 +10,13 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{$game->playerMin}} to {{$game->playerMax}} players</th>
-            <th>Ages {{$game->ageMin}}+</th>
-            <th> {{round($game->length)}} minutes long </th>
+            <th> Added By: {{$user->name}} </th>
+            <td>{{$game->playerMin}} to {{$game->playerMax}} players</td>
+            <td>Ages {{$game->ageMin}}+</td>
+            <td> {{round($game->length)}} minutes long </td>
         </tr>
         <tr>
-            <th>Category: {{$game->category->name}}  </th>
+            <td>Category: {{$game->category->name}}  </td>
         </tr>
         <tr>
         </tr>
@@ -30,10 +31,17 @@
             <tr>
                 <td>
                     @can('view', $game)
-                    <span style="float:right;">
-                        <strong style="font-size:20px;">
-                            <a href="{{ route('favorite.add', ['id' => $game->id ])}}" class="btn btn-success" style="color: #ecd030c9">Add to Favorites </a></strong>
+                    <form action="{{ route('favorite.add', ['id' => $game->id ])}}" method="POST">
+                        @csrf
+                        <span style="float:right;">
+                            <strong style="font-size:20px;">
+                                <button type="submit" class="btn btn-success" style="color: #000000c9">
+                                    Add to Favorites
+                                </button>
+                                {{-- <a href="{{ route('favorite.add', ['id' => $game->id ])}}" class="btn btn-success" style="color: #ecd030c9">Add to Favorites </a> --}}
+                            </strong>
                     </span>
+                    </form>
                     @endcan
                 </td>
             </tr>
@@ -48,7 +56,7 @@
     <h3 align="center"> Reviews </h3>
     {{-- <table class="table table-striped"> --}}
         <td>
-            <a href="{{ route('review.create', ['id' => $game->id ])}} style="color: #570a46c9"">Add a New Review</a>
+            <a href="{{ route('review.create', ['id' => $game->id ])}}" style="color: #570a46c9">Add a New Review</a>
         </td>
         <tbody>
 
