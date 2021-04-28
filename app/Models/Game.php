@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Game extends Model
 {
     use HasFactory;
-    // use SoftDeletes;
+    use SoftDeletes;
 
     public function category()
     {
@@ -30,6 +31,11 @@ class Game extends Model
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function isFavorited()
+    {
+        return Favorite::where('game_id', '=', $this->id)->where('user_id', '=', Auth::User()->id)->first();
     }
 
     public function averageDifficulty()

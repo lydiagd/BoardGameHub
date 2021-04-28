@@ -24,10 +24,37 @@ class FavoriteController extends Controller
         
     }
 
+    public function userFavorites()
+    {
+        $favorites = Favorite::With(['game'])->join('games', 'games.id', '=', 'favorites.game_id')
+        ->join('users', 'favorites.user_id', '=', 'users.id')
+        ->select('*', 'games.name as gameName', 'games.id as game_id')
+        ->groupBy('games.name')
+        ->orderByRaw('COUNT(*) DESC')
+        ->limit(3)
+        ->get();
+
+        return view('userFavorites', [
+            'games' => $favorites,
+        ]);
+    }
+
+
     public function add($id)
     {
         $game = Game::Where('id', '=', $id)->first();
-        $this->authorize('view', $game);
+
+        // Auth::User()->can('create');
+        $this->authorize('create', App\Models\Favorite::class);
+        
+        $findFavorite = Favorite::where('game_id', '=', $this->id)->where('user_id', '=', Auth::User()->id)->first();
+
+        if($findFavorite->count > 0)
+        {
+            return redirect()
+            ->route('games.show', ['id' => $id ])
+            ->with('error', "You already have {$game->name} on your favorites list!");
+        }
 
         $favorite = new Favorite();
         $favorite->game_id = $id;
@@ -63,6 +90,8 @@ class FavoriteController extends Controller
             //check if authorized to remove
         
             $favorite = Favorite::Where('id', '=', $id)->first();
+
+            $this->authorize('delete', $favorite);
 
             $game = Game::Where('id', '=', $favorite->game_id)->first();
 

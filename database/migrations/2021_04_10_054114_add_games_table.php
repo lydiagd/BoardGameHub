@@ -23,6 +23,7 @@ class AddGamesTable extends Migration
             $table->integer('ageMin');
             $table->unsignedDecimal('length', $precision = 8, $scale = 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

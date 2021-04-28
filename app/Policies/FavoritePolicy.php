@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Game;
 use App\Models\User;
+use App\Models\favorite;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
-class GamePolicy
+class FavoritePolicy
 {
     use HandlesAuthorization;
 
@@ -19,19 +19,19 @@ class GamePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\favorite  $favorite
      * @return mixed
      */
-    public function view(User $user, Game $game)
+    public function view(User $user, favorite $favorite)
     {
-        return Auth::check();
+        //
     }
 
     /**
@@ -42,46 +42,42 @@ class GamePolicy
      */
     public function create(User $user)
     {
-        // return true;
+        return $user->id > 0;
+        // return FALSE;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\favorite  $favorite
      * @return mixed
      */
-    public function update(User $user, Game $game)
+    public function update(User $user, favorite $favorite)
     {
-        return $user->id === $game->user_id;
-    }
-
-    public function add()
-    {
-
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\favorite  $favorite
      * @return mixed
      */
-    public function delete(User $user, Game $game)
+    public function delete(User $user, favorite $favorite)
     {
-        //
+        return $user->id === $favorite->user_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\favorite  $favorite
      * @return mixed
      */
-    public function restore(User $user, Game $game)
+    public function restore(User $user, favorite $favorite)
     {
         //
     }
@@ -90,10 +86,10 @@ class GamePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\favorite  $favorite
      * @return mixed
      */
-    public function forceDelete(User $user, Game $game)
+    public function forceDelete(User $user, favorite $favorite)
     {
         //
     }

@@ -25,6 +25,8 @@ Route::get('/', function () {
 Route::get('/games', 'App\Http\Controllers\GameController@index')->name('games');
 Route::get('/games/{id}', 'App\Http\Controllers\GameController@show')->name('games.show');
 
+Route::get('/games/userfavorites', 'App\Http\Controllers\FavoriteController@userFavorites')->name('allfavorites');
+
 
 Route::post('/games/search', 'App\Http\Controllers\GameController@search')->name('games.search');
 

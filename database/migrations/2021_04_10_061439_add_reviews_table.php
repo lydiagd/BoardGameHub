@@ -15,10 +15,12 @@ class AddReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id')->constrained();
+            $table->foreignId('game_id')->constrained()->onDelete('cascade');
             $table->integer('difficulty');
+            $table->integer('rating');
             $table->boolean('playAgain');
             $table->longText('body');
+            $table->timestamps();
         });
 
     }

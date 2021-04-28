@@ -31,6 +31,11 @@
             <tr>
                 <td>
                     @can('view', $game)
+                    @if($game->isFavorited())
+                    <span style="float:right;">
+                        <a href="{{ route('favorite.removeForm', ['id' => $game->isFavorited() ])}}" class="btn btn-danger btn-sm">Remove from Favorite List </a></strong>
+                    </span>
+                    @else
                     <form action="{{ route('favorite.add', ['id' => $game->id ])}}" method="POST">
                         @csrf
                         <span style="float:right;">
@@ -42,6 +47,7 @@
                             </strong>
                     </span>
                     </form>
+                    @endif
                     @endcan
                 </td>
             </tr>

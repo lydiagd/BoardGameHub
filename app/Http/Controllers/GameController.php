@@ -34,9 +34,10 @@ class GameController extends Controller
         // $review1 = Review::Where('game_id', '=', $id)->first();
 
         $reviews = Review::Where('game_id', '=', $id)
-        // ->join('user', 'user.id', '=', 'review.user_id')
+        // ->join('users', 'users.id', '=', 'review.user_id')
         // ->select('*', 'reviews.id as id', 'users.name as username')
         ->orderBy('reviews.id', 'desc')->get();
+        // CHANGE TO CREATED AT
 
         $user = User::Where('id', '=', $game->user_id)->first();
 
