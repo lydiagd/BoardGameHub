@@ -28,7 +28,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($games as $game)
+            @foreach($games as $game)
             <tr>
                 <td style="padding-left:5px;padding-bottom:26px;">
                     <strong style="font-size:20px;">
@@ -58,6 +58,24 @@
             @endforeach
         </tbody>
     </table>
+    @if($deletedFavorites->count() > 0)
+    <h3> Deleted games: </h3>
+    <table class="table table-striped">
+        @foreach($deletedFavorites as $df)
+            <tr>
+                <td>
+                    {{$df->name}}
+                </td>
+                <td>
+                    ----------
+                </td>
+                <td>
+                    Deleted at: {{$df->deleted_at}}
+                </td>
+            </tr>
+        @endforeach
+    </table>
+    @endif
     </div>
 </body>
 @endif

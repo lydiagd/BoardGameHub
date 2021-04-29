@@ -25,6 +25,7 @@ class ReviewController extends Controller
     public function store(Request $request){
         $request->validate([
             'difficulty' => 'required|integer|lte:10|gt:0',
+            'rating' => 'required|integer|lte:10|gt:0',
             'body' => 'required',
         ]); 
 
@@ -32,6 +33,7 @@ class ReviewController extends Controller
         $review->game_id = $request->input('game');
         $review->user_id = Auth::User()->id;
         $review->difficulty = $request->input('difficulty');
+        $review->rating = $request->input('rating');
         $review->body = $request->input('body');
         if( $request->input('again') == 1){
             

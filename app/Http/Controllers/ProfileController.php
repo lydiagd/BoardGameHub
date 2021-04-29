@@ -36,7 +36,28 @@ class ProfileController extends Controller
 
     public function deleted($id, Request $request)
     {
+        if($request->submit == "Delete")
+        {
+            //check if authorized to remove
         
+            $game = Game::Where('id', '=', $id)->first();
+
+            $this->authorize('delete', $game);
+
+            $name = $game->name;
+
+            $game->delete();
+            return redirect()
+            ->route('profile.mygames')
+            ->with('success', "Removed {$name} from the Hub");
+    
+        }
+        else if($request->submit == "Cancel")
+        {
+            return redirect()
+            ->route('profile.mygames')->with('error', "Canceled removal");
+            
+        }
     }
 
 

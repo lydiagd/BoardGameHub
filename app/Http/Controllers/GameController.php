@@ -123,7 +123,7 @@ class GameController extends Controller
 
 
         return redirect()
-            ->route('games')
+            ->route('profile.mygames')
             ->with('success', "Successfully created game entry: {$request->input('name')}");
 
     }

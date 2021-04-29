@@ -54,11 +54,11 @@
 
         </tbody>
     </table>
-     <h3>   Description of Game: </h3>
+     <h4>   Description of Game: </h4>
     <p>
         {{$game->description}}
     </p>
-    <h3>------------------------------------------------------------------------------</h3>
+    <h3>-----------------------------------------------------------------------------</h3>
     <h3 align="center"> Reviews </h3>
     {{-- <table class="table table-striped"> --}}
         <td>
@@ -67,15 +67,22 @@
         <tbody>
 
             @foreach($reviews as $review)
-            <div style="background-color:rgba(238, 222, 222, 0.047); text-align:left; font-size:16px; vertical-align: middle; padding:10px 0;">
-   
+            <div style="background-color:rgba(238, 222, 222, 0.047);  font-size:16px">
+
                 <h4>{{$review->getUser()}}</h4> 
-                <p><br>Difficulty: {{$review->difficulty}}</p>
+                <div class="box">
+                <p>Difficulty: {{$review->difficulty}} / 10 <br>
+                Rating: {{$review->rating}} / 10 </p>
 
-                <div class="box" >
-
-                    <p>Would Play Again: {{$review->playAgain}}
-                        <span style = "display:block; font-size:16px;">Review Content:</span></p>
+                    <p style="text-align:right;">
+                    Would Play Again:
+                        <?php if($review->playAgain == 1) { ?>
+                        Yes
+                        <?php } else {?>
+                        No
+                        <?php } ?>
+                    </p>
+                        <span style = "display:block; font-size:16px;"><p><br>Review Content:</p></span>
                    
                     <p><br> {{$review->body}} </p>
 

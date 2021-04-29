@@ -18,15 +18,18 @@ class FavoriteController extends Controller
         'favorites.created_at as created_at')
         ->orderBy('games.name')->get();
 
+        $deletedFavorites = Favorite::deletedFav();
+
         return view('profile.favorites', [
             'games' => $games,
+            'deletedFavorites' => $deletedFavorites,
         ]);
         
     }
 
     public function userFavorites()
     {
-        $favorites = Favorite::With(['game'])->join('games', 'games.id', '=', 'favorites.game_id')
+        $favorites = Favorite::With(['game', 'user'])->join('games', 'games.id', '=', 'favorites.game_id')
         ->join('users', 'favorites.user_id', '=', 'users.id')
         ->select('*', 'games.name as gameName', 'games.id as game_id')
         ->groupBy('games.name')
@@ -47,9 +50,9 @@ class FavoriteController extends Controller
         // Auth::User()->can('create');
         $this->authorize('create', App\Models\Favorite::class);
         
-        $findFavorite = Favorite::where('game_id', '=', $this->id)->where('user_id', '=', Auth::User()->id)->first();
+        $findFavorite = Favorite::where('game_id', '=', $id)->where('user_id', '=', Auth::User()->id)->first();
 
-        if($findFavorite->count > 0)
+        if(!is_null($findFavorite))
         {
             return redirect()
             ->route('games.show', ['id' => $id ])
@@ -104,7 +107,7 @@ class FavoriteController extends Controller
         else if($request->submit == "Cancel")
         {
             return redirect()
-            ->route('profile.favorites')->with('success', "Canceled removal");
+            ->route('profile.favorites')->with('error', "Canceled removal");
             
         }
 

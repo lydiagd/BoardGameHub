@@ -36,11 +36,12 @@
 
             .box{
                 display: flex;
-                justify-content: center;
+                /* justify-content: center; */
                 /* align-items: center; */
-                background-color: rgba(207, 102, 181, 0.322);
-                /* color: white;
-                padding: 1em 1.5em; */
+                border: 2px solid black;
+                background-color: rgba(19, 1, 80, 0.322);
+                 color: white;
+                padding: 1em 1.5em; 
             }
 
             body {
@@ -93,7 +94,6 @@
                     <a href="{{ route('allfavorites')}}" class="list-group-item list-group-item-action bg-light">User's Favorites</a>
                     @if (Auth::check())
                             <a href="{{ route('profile.index') }}" class="list-group-item list-group-item-action bg-light">Profile</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">My Games</a>
                             <form method="post" action="{{ route('auth.logout') }}">
                                 @csrf
                                 <button type="submit" class="list-group-item list-group-item-action bg-light">Logout</button>

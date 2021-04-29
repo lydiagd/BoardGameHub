@@ -20,6 +20,15 @@ New Review for {{$game->name}}
         @enderror
     </div>
 
+    {{-- rating --}}
+    <div class="mb-3">
+        <label for="rating" class="form-label">Rate this game from 1 to 10</label>
+        <input type="number" name="rating" id="rating" class="form-control"  value="{{ old('rating')}}">
+        @error('rating')
+            <small class="text-danger">{{$message}}</small>
+        @enderror
+    </div>
+
     <div class="mb-3">
         <label for="again"> Would you play this game again?</label>
         <input type="checkbox" id="again" name="again" value="1" {{ old('again') ? 'checked': true}}>

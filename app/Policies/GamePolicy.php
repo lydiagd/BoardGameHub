@@ -71,7 +71,7 @@ class GamePolicy
      */
     public function delete(User $user, Game $game)
     {
-        //
+        return $user->id === $game->user_id;
     }
 
     /**
