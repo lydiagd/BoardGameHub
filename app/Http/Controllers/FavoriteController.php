@@ -13,12 +13,14 @@ class FavoriteController extends Controller
     public function index()
     {
         $games = Favorite::With(['game', 'user'])->join('users', 'favorites.user_id', '=', 'users.id')
-        ->join('games', 'games.id', '=', 'favorites.game_id')
+        ->join('games', 'games.id', '=', 'favorites.game_id')->whereNull('isDeleted')
         ->select('*', 'games.name as gameName', 'games.id as game_id', 'favorites.id as fav_id', 
         'favorites.created_at as created_at')
         ->orderBy('games.name')->get();
 
         $deletedFavorites = Favorite::deletedFav();
+
+        // $deletedFavorites = Favorite::Where('user_id', '=', Auth::User()->id)->where('isDeleted', '=', true)->get();
 
         return view('profile.favorites', [
             'games' => $games,
@@ -99,6 +101,7 @@ class FavoriteController extends Controller
             $game = Game::Where('id', '=', $favorite->game_id)->first();
 
             $favorite->delete();
+
             return redirect()
             ->route('profile.favorites')
             ->with('success', "Removed {$game->name} from your favorites list");

@@ -59,7 +59,7 @@
         </tbody>
     </table>
     @if($deletedFavorites->count() > 0)
-    <h3> Deleted games: </h3>
+    <h3> Deleted Games: </h3>
     <table class="table table-striped">
         @foreach($deletedFavorites as $df)
             <tr>

@@ -23,6 +23,6 @@ class Favorite extends Model
     public function scopeDeletedFav(){
         return Game::onlyTrashed()->join('favorites', 'favorites.game_id', '=', 'games.id')
         ->select('*', 'games.name as gameName', 'games.id as game_id', 'favorites.user_id as favuser_id', 'favorites.game_id as favegame_id')
-        ->where('favorites.user_id', '=', Auth::User()->id)->get();
+        ->where('favorites.user_id', '=', Auth::User()->id)->where('isDeleted', '=', true)->get();
     }
 }

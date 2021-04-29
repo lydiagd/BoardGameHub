@@ -46,7 +46,15 @@ class ProfileController extends Controller
 
             $name = $game->name;
 
+            $allfavs = Favorite::Where('game_id', '=', $id)->get();
+            foreach($allfavs as $allfav)
+            {
+                $allfav->isDeleted = true;
+                $allfav->save();
+            }
+
             $game->delete();
+
             return redirect()
             ->route('profile.mygames')
             ->with('success', "Removed {$name} from the Hub");
