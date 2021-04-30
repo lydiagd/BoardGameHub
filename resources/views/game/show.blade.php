@@ -5,6 +5,13 @@
 @endsection
 <title align="center">{{$game->name}}</title>
 @section('content')
+
+<style>
+    .wrapper{position:relative;}
+    .right,.left{width:50%; position:absolute;}
+    .right{right:0;}
+    .left{left:0;}
+</style>
 <body style="background-color:rgb(151, 208, 223);">
 
     <table class="table table-striped">
@@ -62,29 +69,50 @@
     <h3 align="center"> Reviews </h3>
     {{-- <table class="table table-striped"> --}}
         <td>
-            <a href="{{ route('review.create', ['id' => $game->id ])}}" style="color: #570a46c9">Add a New Review</a>
+            <a href="{{ route('review.create', ['id' => $game->id ])}}" style="color: #570a46c9;float:right" align="right">Add a New Review</a>
         </td>
         <tbody>
 
             @foreach($reviews as $review)
             <div style="background-color:rgba(238, 222, 222, 0.047);  font-size:16px">
 
-                <h4>{{$review->getUser()}}</h4> 
-                <div class="box">
-                <p>Difficulty: {{$review->difficulty}} / 10 <br>
-                Rating: {{$review->rating}} / 10 </p>
+                <h4>{{$review->getUser()}}:</h4> 
+                <div class="box" style="margin-bottom: 50px;">
+                    <table class="table">
+                        <caption style="caption-side:bottom;color:black;"><span style = "font-size:18px;"><b>Review Content:</b>
+                            <p><i> {{$review->body}} </i></p> </span>
+                        </span></caption>
+                        {{-- <thead> --}}
+                            
+                            <tr style="color:white">
+                                {{-- <font color="white"> --}}
+                                <td>
+                                    Difficulty: {{$review->difficulty}} / 10
+                                </td>
+                                <td>
+                                    Rating: {{$review->rating}} / 10 </p>
+                                </td>
+                                <td>
+                                    Would Play Again:
+                                    <?php if($review->playAgain == 1) { ?>
+                                    Yes
+                                    <?php } else {?>
+                                    No
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                    </table>
+                        {{-- </thead> --}}
+                        {{-- <p>Difficulty: {{$review->difficulty}} / 10 <br>
+                        Rating: {{$review->rating}} / 10 </p> --}}
 
-                    <p style="text-align:right;">
-                    Would Play Again:
-                        <?php if($review->playAgain == 1) { ?>
-                        Yes
-                        <?php } else {?>
-                        No
-                        <?php } ?>
-                    </p>
-                        <span style = "display:block; font-size:16px;"><p><br>Review Content:</p></span>
-                   
-                    <p><br> {{$review->body}} </p>
+                    {{-- <table class="table">
+                        {{-- <tbody> 
+                                <span style = "display:block; font-size:18px;"><br><br><b>Review Content:</b>
+                                <p><i> {{$review->body}} </i></p> </span>
+                            </span>
+                        {{-- </tbody> 
+                    </table> --}}
 
                 </div>
             </div>

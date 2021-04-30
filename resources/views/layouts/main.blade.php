@@ -41,7 +41,7 @@
                 border: 2px solid black;
                 background-color: rgba(19, 1, 80, 0.322);
                  color: white;
-                padding: 1em 1.5em; 
+                padding: 5px; 
             }
 
             body {
