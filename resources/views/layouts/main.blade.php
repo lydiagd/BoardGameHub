@@ -91,7 +91,7 @@
                     <a href="{{ route('main') }}" class="list-group-item list-group-item-action bg-light">Main Dashboard</a>
                     <a href="{{ route('about') }}" class="list-group-item list-group-item-action bg-light">About</a>
                     <a href="{{ route('games')}}" class="list-group-item list-group-item-action bg-light">All Games</a>
-                    <a href="{{ route('allfavorites')}}" class="list-group-item list-group-item-action bg-light">User's Favorites</a>
+                    {{-- <a href="{{ route('allfavorites')}}" class="list-group-item list-group-item-action bg-light">User's Favorites</a> --}}
                     @if (Auth::check())
                             <a href="{{ route('profile.index') }}" class="list-group-item list-group-item-action bg-light">Profile</a>
                             <form method="post" action="{{ route('auth.logout') }}">

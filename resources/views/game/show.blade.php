@@ -68,15 +68,28 @@
     <h3>-----------------------------------------------------------------------------</h3>
     <h3 align="center"> Reviews </h3>
     {{-- <table class="table table-striped"> --}}
+        <div style="margin-bottom: 50px;">
         <td>
-            <a href="{{ route('review.create', ['id' => $game->id ])}}" style="color: #570a46c9;float:right" align="right">Add a New Review</a>
+            <a href="{{ route('review.create', ['id' => $game->id ])}}" class="btn btn-info" style="color: #570a46c9;float:right" >Add a New Review</a>
         </td>
+        </div>
         <tbody>
+            @if($reviews->count() < 1)
+                <h4><i> No reviews added yet! </i></h4>
+            @else
 
             @foreach($reviews as $review)
             <div style="background-color:rgba(238, 222, 222, 0.047);  font-size:16px">
 
                 <h4>{{$review->getUser()}}:</h4> 
+                <td> 
+                    {{-- make it so if you're authorized to edit entry, you can do so --}}
+                    @can('update', $review)
+                    <a href="{{ route('review.edit', ['id' => $review->id ])}}" class="button" style="text-align: center;">
+                        Edit Your Review
+                    </a>
+                    @endcan
+                </td>
                 <div class="box" style="margin-bottom: 50px;">
                     <table class="table">
                         <caption style="caption-side:bottom;color:black;"><span style = "font-size:18px;"><b>Review Content:</b>
@@ -117,6 +130,7 @@
                 </div>
             </div>
             @endforeach
+            @endif
         </tbody>
     {{-- </table> --}}
 </body>

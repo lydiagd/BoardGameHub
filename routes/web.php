@@ -14,9 +14,9 @@ if (env('APP_ENV') !== 'local') {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/laravel', function () {
-    return view('welcome');
-});
+// Route::get('/laravel', function () {
+//     return view('welcome');
+// });
 
 Route::get('/', function () {
     return view('game.index');
@@ -62,6 +62,13 @@ Route::middleware(['custom-auth'])->group(function () {
     
     Route::get('/games/{id}/review', 'App\Http\Controllers\ReviewController@create')->name('review.create');
     Route::post('/games/{id}', 'App\Http\Controllers\ReviewController@store')->name('review.store');
+    Route::get('/games/{id}/review/edit', 'App\Http\Controllers\ReviewController@edit')->name('review.edit');
+    Route::post('/games/{id}/review/update', 'App\Http\Controllers\ReviewController@update')->name('review.update');
+    
+    Route::get('/games/{id}/review/delete', 'App\Http\Controllers\ReviewController@removeForm')->name('review.removeForm');
+    Route::post('/games/{id}/review/delete', 'App\Http\Controllers\ReviewController@remove')->name('review.remove');
+    
+
 
     Route::post('/games/favorite/{id}', 'App\Http\Controllers\FavoriteController@add')->name('favorite.add');
 

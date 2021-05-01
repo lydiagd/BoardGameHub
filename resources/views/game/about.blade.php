@@ -16,9 +16,10 @@
 <div class="text-end mb-3" vertical-align:top>
     <h3>Welcome!</h3>
     <p>This site is meant to be an interactive community hub for online games, such a board games, card games, Escape Rooms,
-      and more fun community games. Check out games other people have added in the '<a href="{{ route('games')}}"> All Games </a>'' tab. 
-      Log in to add your own game links and save games in your 'Favorites' list. Have fun and game on! </p>
-    <img src="{{url('/images/board-games.jpg')}}" alt="Image"/>
+      and more fun community games. Check out games other people have added in the '<a href="{{ route('games')}}"> All Games </a>' tab. 
+      Log in to add your own game links, review other games, and save games in your 'Favorites' list. Have fun and game on! </p>
+    <h6><i>Created By: Lydia DiBlasio</i></h6>
+      <img src="{{url('/images/board-games.jpg')}}" alt="Image"/>
 </div>
 {{-- <div>
     
