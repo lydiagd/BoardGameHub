@@ -51,7 +51,7 @@ class ReviewController extends Controller
         }
         $review->save();
 
-        return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Added Review for {$game}");
+        return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Added Review for {$game->name}");
     }
 
     public function edit($id)
