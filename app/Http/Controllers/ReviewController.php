@@ -32,7 +32,7 @@ class ReviewController extends Controller
             'body' => 'required',
         ]); 
 
-        $this->authorize('create');
+        $this->authorize('create', App\Models\Review::class);
 
         $review = new Review();
         $review->game_id = $request->input('game');
