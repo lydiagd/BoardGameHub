@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -37,14 +38,16 @@ class GameController extends Controller
         // ->join('users', 'users.id', '=', 'review.user_id')
         // ->select('*', 'reviews.id as id', 'users.name as username')
         ->orderBy('reviews.id', 'desc')->get();
-        // CHANGE TO CREATED AT
 
         $user = User::Where('id', '=', $game->user_id)->first();
+
+        $totalFavorites = Favorite::Where('game_id', '=', $id)->get();
 
         return view('game.show', [
             'game' => $game,
             'reviews' => $reviews,
             'user' => $user,
+            'totalFavorites' => $totalFavorites,
         ]);
 
     }

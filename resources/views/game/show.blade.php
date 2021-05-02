@@ -58,6 +58,12 @@
                     @endcan
                 </td>
             </tr>
+            <tr>
+                <td><i>
+                    Favorited by {{$totalFavorites->count()}} other people
+                    </i>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -69,6 +75,11 @@
     <h3 align="center"> Reviews </h3>
     {{-- <table class="table table-striped"> --}}
         <div style="margin-bottom: 50px;">
+            @if($game->averageRating() > 0)
+            <th>
+                Average rating: {{$game->averageRating()}}
+            </th>
+            @endif
         <td>
             <a href="{{ route('review.create', ['id' => $game->id ])}}" class="btn btn-info" style="color: #570a46c9;float:right" >Add a New Review</a>
         </td>
@@ -115,17 +126,6 @@
                                 </td>
                             </tr>
                     </table>
-                        {{-- </thead> --}}
-                        {{-- <p>Difficulty: {{$review->difficulty}} / 10 <br>
-                        Rating: {{$review->rating}} / 10 </p> --}}
-
-                    {{-- <table class="table">
-                        {{-- <tbody> 
-                                <span style = "display:block; font-size:18px;"><br><br><b>Review Content:</b>
-                                <p><i> {{$review->body}} </i></p> </span>
-                            </span>
-                        {{-- </tbody> 
-                    </table> --}}
 
                 </div>
             </div>

@@ -44,4 +44,11 @@ class Game extends Model
         return round($average, 1);
         
     }
+
+    public function averageRating()
+    {
+        $average = DB::table('reviews')->where('game_id', $this->id)->avg('rating');
+        return round($average, 1);
+        
+    }
 }
