@@ -51,7 +51,7 @@ class ReviewController extends Controller
         }
         $review->save();
 
-        return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Added Review for {$game->name}");
+        return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Added Review for {$game}");
     }
 
     public function edit($id)
@@ -91,6 +91,7 @@ class ReviewController extends Controller
                 'rating' => 'required|integer|lte:10|gt:0',
                 'body' => 'required',
             ]); 
+            $game = Game::Where('id', '=', $request->input('game'))->first();
 
             $review->game_id = $request->input('game');
             $review->user_id = Auth::User()->id;
@@ -106,7 +107,7 @@ class ReviewController extends Controller
             }
             $review->save();
 
-            return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Updated Review for {$request->input('game')}");
+            return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Updated Review for {$game->name}");
    
 
         }
