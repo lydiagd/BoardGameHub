@@ -62,11 +62,11 @@ Route::middleware(['custom-auth'])->group(function () {
     
     Route::get('/games/{id}/review', 'App\Http\Controllers\ReviewController@create')->name('review.create');
     Route::post('/games/{id}', 'App\Http\Controllers\ReviewController@store')->name('review.store');
-    Route::get('/games/{id}/review/edit', 'App\Http\Controllers\ReviewController@edit')->name('review.edit');
-    Route::post('/games/{id}/review/update', 'App\Http\Controllers\ReviewController@update')->name('review.update');
+    Route::get('/games/review/{id}/edit', 'App\Http\Controllers\ReviewController@edit')->name('review.edit');
+    Route::post('/games/review/{id}/update', 'App\Http\Controllers\ReviewController@update')->name('review.update');
     
-    Route::get('/games/{id}/review/delete', 'App\Http\Controllers\ReviewController@removeForm')->name('review.removeForm');
-    Route::post('/games/{id}/review/delete', 'App\Http\Controllers\ReviewController@remove')->name('review.remove');
+    Route::get('/games/review/{id}/delete', 'App\Http\Controllers\ReviewController@removeForm')->name('review.removeForm');
+    Route::post('/games/review/{id}/delete', 'App\Http\Controllers\ReviewController@remove')->name('review.remove');
     
 
 

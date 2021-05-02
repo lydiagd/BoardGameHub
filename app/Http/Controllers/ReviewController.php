@@ -133,7 +133,7 @@ class ReviewController extends Controller
 
         $review = Review::Where('id', '=', $id)->first();
         
-        $game = Game::Where('id', '=', $id)->first();
+        $game = Game::Where('id', '=', $review->game_id)->first();
 
         $this->authorize('delete', $review);
 
