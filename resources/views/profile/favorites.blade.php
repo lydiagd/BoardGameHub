@@ -63,11 +63,14 @@
     <table class="table table-striped">
         @foreach($deletedFavorites as $df)
             <tr>
-                <td>
+                <th>
                     {{$df->name}}
-                </td>
+                </th>
                 <td>
                     ----------
+                </td>
+                <td>
+                    Link: {{$df->link}}
                 </td>
                 <td>
                     Deleted at: {{$df->deleted_at}}

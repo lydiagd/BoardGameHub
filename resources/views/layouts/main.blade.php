@@ -116,7 +116,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                                 <li class="nav-item active">
-                                <a class="nav-link" href="#">Main Page <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{{ route('main') }}">Main Dashboard <span class="sr-only">(current)</span></a>
                                 </li>
                                 {{-- <li class="nav-item">
                                 <a class="nav-link" href="#">My Favorites</a>
@@ -130,7 +130,10 @@
                                     <a class="dropdown-item" href="{{ route('profile.favorites') }}">My Favorites</a>
                                     <a class="dropdown-item" href="{{ route('profile.mygames') }}">My Games</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('auth.logout') }}" style="color:rgb(134, 7, 7)">Log Out</a>
+                                    <form method="post" action="{{ route('auth.logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item" style="color:rgb(231, 18, 18)">Log Out</button>
+                                    </form>
                                 </div>
                                 </li>
                                 @endif

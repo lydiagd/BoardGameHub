@@ -14,8 +14,9 @@ class FavoriteController extends Controller
     {
         $games = Favorite::With(['game', 'user'])->join('users', 'favorites.user_id', '=', 'users.id')
         ->join('games', 'games.id', '=', 'favorites.game_id')->whereNull('isDeleted')
-        ->select('*', 'games.name as gameName', 'games.id as game_id', 'favorites.id as fav_id', 
+        ->select('*', 'favorites.user_id as user_id', 'games.name as gameName', 'games.id as game_id', 'favorites.id as fav_id', 
         'favorites.created_at as created_at')
+        ->where('favorites.user_id', '=', Auth::User()->id)
         ->orderBy('games.name')->get();
 
         $deletedFavorites = Favorite::deletedFav();
