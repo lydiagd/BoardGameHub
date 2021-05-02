@@ -34,6 +34,8 @@ class ReviewController extends Controller
 
         $this->authorize('create', App\Models\Review::class);
 
+        $game = Game::Where('id', '=', $request->input('game'))->first();
+
         $review = new Review();
         $review->game_id = $request->input('game');
         $review->user_id = Auth::User()->id;
@@ -49,7 +51,7 @@ class ReviewController extends Controller
         }
         $review->save();
 
-        return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Added Review for {$request->input('game')}");
+        return redirect()->route('games.show',['id' => $request->input('game')])->with('success', "Added Review for {$game->name}");
     }
 
     public function edit($id)
