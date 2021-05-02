@@ -12,7 +12,8 @@ class ReviewController extends Controller
 {
     public function create($id){
 
-        $this->authorize('create');
+
+        $this->authorize('create', App\Models\Review::class);
 
         $game = Game::Where('id', '=', $id)->first();
 
